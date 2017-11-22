@@ -1,3 +1,22 @@
+<?php
+include 'conection.php';
+if(isset($_POST["submit"]))
+{
+$name=$_POST["name"];
+$type=$_POST["type"];
+$duration=$_POST["duration"];
+$cost=$_POST["cost"];
+$seat=$_POST["seat"];
+
+
+
+$sql1=$sql="INSERT INTO `tbl_course`(`name`, `type`, `duration`, `cost`, `seat`) VALUES ('$name','$type','$duration','$cost','$seat')";
+echo $sql1;
+$result=mysqli_query($con,$sql1);
+echo "REGISTER Sucessfully";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +40,7 @@
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="style.css" />
-        <title>Students View</title>
+        <title>Student Register</title>
         <style>
 p{
 text-align: justify;
@@ -39,7 +58,7 @@ color:red;
             <header>
                 <div id="main_title">
                    <img src="LOGO1.png" style="margin-left:0px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp<h1><font color=" #0d0d0d"> View Students</h1>
+&nbsp&nbsp<h1><font color=" #0d0d0d">Add  New Course</h1>
                     
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -49,8 +68,7 @@ color:red;
 <br>
 <br>
 <br>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="logout.php">Logout</a>
+
 
                 </div>
 
@@ -77,47 +95,39 @@ color:red;
             </header>
             <div id="b_image">
           <a href="prod.php">
-          <img border="0" alt="banner image" src="a4.jpg" width="1320" height="350" >
+          <img border="0" alt="banner image" src="re2.jpg" width="1320" height="350" >
           </a>
                    </div>
 </style>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://rawgit.com/ozonhub/oh-autoVal/master/js/oh-autoval-script.js"></script>
+       
 </head>
 <body>
-<center><h2><font color="#000000">Students List</center></font></h2></marquee>
-<table align="center" width="200" border="1">
-  <tr>
-    <td><font color="black">&nbsp;name</font></td>
-    <td><font color="black">&nbsp;address</font></td>
-    <td><font color="black">&nbsp;gender</font></td>
-	<td><font color="black">&nbsp;DOB</font></td>
-    <td><font color="black">&nbsp;PhNumber</font></td>
-    <td><font color="black">&nbsp;Email</font></td>
-	<td><font color="black">&nbsp;Year Of Addmission</font></td>
-    <td><font color="black">&nbsp;Type</font></td>
-    
-  
-   
-  </tr>
-<?php
-include 'conection.php';
-$results=mysqli_query($con,"SELECT * FROM `tbl_userreg` where utype='student'");
-while($row=mysqli_fetch_array($results))
-{
 
-?>
+
+<div><form name="myform" id="myform" method="post" action="#"><center>
+<table>
 <tr>
-<td><?php echo $row['name']; ?></td>
-<td><?php echo $row['address']; ?></td>
-<td><?php echo $row['gender']; ?></td>
-<td><?php echo $row['dob']; ?></td>
-<td><?php echo $row['phno']; ?></td>
-<td><?php echo $row['email']; ?></td>
-<td><?php echo $row['yoa']; ?></td>
-<td><?php echo $row['type']; ?></td>
-<tr><td> <h3><a href="studedit.php?id=<?php echo $row['id'];?>" >Edit</a> 
-<a href="stdelete.php?id=<?php echo $row['id'];?>">Delete</a>
-</tr>
-<?php } ?>
+
+     <tr><td> Name</td> <td><input type="text" name="name" class="oh-autoval av-name" av-message="Invalid Name"></td></tr>
+	 <tr><td>type</td><td> <input type="text"  name="type" class="oh-autoval av-name" av-message="Invalid type"></td></td>
+	 <tr><td> duration</td> <td><input type="text" name="duration"  max="20" required></td></tr></br><tr></tr>
+	 <tr><td> cost</td> <td><input type="text" name="cost" class="oh-autoval av-price" av-message="Invalid pyment" ></td></tr></br><tr></tr>
+	 <tr><td> seat</td> <td><input type="text" name="seat" required></td></tr></br><tr></tr>
+	 <tr><td><input type="submit" value="submit" name="submit" ></td></tr></center>
+		
+	&nbsp&nbsp
 </table>
-</body>
+</form>
+<script src="js/jquery.js"></script>
+<script src="js/oh-autoval-script.js"></script>
+</div>
+
+<div class="footer"><font color="white">
+© 2016 Amalagiri Hospital of medical science. All rights reserved.
+</font></div>
+</body> 
 </html>
